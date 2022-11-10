@@ -1,0 +1,11 @@
+pytest
+pytest-cov
+pytest-html
+requests
+assertpy
+lxml
+jsonpath-ng
+reportportal-client
+pytest-reportportal
+pytest-xdist
+Faker
