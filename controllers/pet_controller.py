@@ -1,7 +1,7 @@
 from controllers.base_controller import BaseController
 
 
-class Pet(BaseController):
+class PetController(BaseController):
     
 
     endpoint = 'pet' 
@@ -20,7 +20,7 @@ class Pet(BaseController):
 
 
     def update(self, body):
-        return self.request.put(f'{self.base_url}/{self.endpoint}', body)
+        return self.request.put(f'{self.base_url}/{self.endpoint}', body, self.headers)
 
 
     def delete(self, pet_id):
