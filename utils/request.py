@@ -1,5 +1,8 @@
 from dataclasses import dataclass
+from utils.logger import Logger
 import requests
+
+logger = Logger()
 
 
 @dataclass
@@ -34,6 +37,7 @@ class Request:
 
 
     def __get_responses(self, response):
+        request = response.request
         status_code = response.status_code
         text = str(response.json())
 
@@ -43,7 +47,7 @@ class Request:
             json = {}
 
         headers = response.headers
-
+        logger.logger(request, response)
         return Response(status_code, text, json, headers)
 
     
