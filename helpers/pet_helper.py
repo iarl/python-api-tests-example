@@ -40,4 +40,26 @@ class PetHelper():
                 "status": status
                 }
         return dumps(body)
+
+
+    def body_with_invalid_id(self, id):
+        body = {
+                "id": id,
+                "category": {
+                    "id": fake.random.randint(1, 100),
+                    "name": fake.word()
+                },
+                "name": fake.name(),
+                "photoUrls": [
+                 
+                    ],
+                "tags": [
+                    {
+                    "id": fake.random.randint(1, 100),
+                    "name": fake.word()
+                    }
+                ],
+                "status": 'available'
+                }
+        return dumps(body)
     

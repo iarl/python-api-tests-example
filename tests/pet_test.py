@@ -39,3 +39,15 @@ def test_delete_pet(add_new_pet):
     response = pet_controller.delete(pet_id=add_new_pet.pet_id)
     assert_that(response.status_code).is_equal_to(200)
 
+
+@pytest.mark.smoke
+@pytest.mark.negative
+@pytest.mark.parametrize(
+    "pet_id,status_code", 
+    [(9223372036854775808, 500),
+    ("string", 500)])
+def test_add_new_pet(pet_id, status_code):
+    body = pet_helper.body_with_invalid_id(pet_id)
+    response = pet_controller.add_new(body)
+    assert_that(response.status_code).is_equal_to(status_code)
+
