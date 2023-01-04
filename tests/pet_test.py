@@ -10,7 +10,7 @@ pet_helper = PetHelper()
 
 @pytest.mark.smoke
 @pytest.mark.positive
-def test_add_new_pet():
+def test_add_new_pet(rp_logger):
     body = pet_helper.valid_body()
     response = pet_controller.add_new(body)
     assert_that(response.status_code).is_equal_to(200)
@@ -18,7 +18,7 @@ def test_add_new_pet():
 
 @pytest.mark.smoke
 @pytest.mark.positive
-def test_find_pet_by_id(add_new_pet):
+def test_find_pet_by_id(add_new_pet, rp_logger):
     response = pet_controller.find_by_id(add_new_pet.pet_id)
     assert_that(response.status_code).is_equal_to(200)
     assert_that(response.text).is_equal_to(prettifier(add_new_pet.text))
@@ -26,7 +26,7 @@ def test_find_pet_by_id(add_new_pet):
 
 @pytest.mark.smoke
 @pytest.mark.positive
-def test_update_pet(add_new_pet):
+def test_update_pet(add_new_pet, rp_logger):
     body = pet_helper.valid_body(status='sold', pet_id=add_new_pet.pet_id)
     response = pet_controller.update(body)
     assert_that(response.status_code).is_equal_to(200)
@@ -35,7 +35,7 @@ def test_update_pet(add_new_pet):
 
 @pytest.mark.smoke
 @pytest.mark.positive
-def test_delete_pet(add_new_pet):
+def test_delete_pet(add_new_pet, rp_logger):
     response = pet_controller.delete(pet_id=add_new_pet.pet_id)
     assert_that(response.status_code).is_equal_to(200)
 
@@ -46,7 +46,7 @@ def test_delete_pet(add_new_pet):
     "pet_id,status_code", 
     [(9223372036854775808, 500),
     ("string", 500)])
-def test_add_new_invalid_pet(pet_id, status_code):
+def test_add_new_invalid_pet(pet_id, status_code, rp_logger):
     body = pet_helper.body_with_invalid_id(pet_id)
     response = pet_controller.add_new(body)
     assert_that(response.status_code).is_equal_to(status_code)

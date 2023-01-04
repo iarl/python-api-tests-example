@@ -1,8 +1,8 @@
-import pytest
+import pytest, logging
 from dataclasses import dataclass
 from controllers.pet_controller import PetController
 from helpers.pet_helper import PetHelper
-
+from reportportal_client import RPLogger, RPLogHandler
 
 @dataclass
 class Response:
@@ -19,3 +19,10 @@ def add_new_pet():
     response = pet_controller.add_new(body)
     return Response(response.json, str(response.json), response.json["id"])
 
+
+@pytest.fixture(scope="session")
+def rp_logger():
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+    logging.setLoggerClass(RPLogger)
+    return logger
