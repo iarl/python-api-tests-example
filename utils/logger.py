@@ -24,5 +24,5 @@ class Logger():
             status = Style.BRIGHT + Fore.GREEN + f'status = {response.status_code}'
         else:
             status = Style.BRIGHT + Fore.RED + f'status = {response.status_code}'
-        print(f'\n[{format_date}] Sending request {method} {url} {status} {duration}s')
-
+        test_result = Style.NORMAL + Fore.BLUE + 'test result:'
+        print(f'\n[{format_date}] Sending request {method} {url} {status} {duration}s {test_result}', end =' ')
