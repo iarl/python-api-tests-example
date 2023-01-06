@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
                 steps {
                     script {
-                        sh "docker build ."
+                        sh "docker build . -v /var/run/docker.sock:/var/run/docker.sock"
                     }
                 }
             }
