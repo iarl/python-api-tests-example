@@ -17,8 +17,4 @@ stop:
 	docker-compose kill
 
 purge:
-	docker-compose kill && docker-compose rm
-
-reportportal:
-	docker-compose -f docker-compose.rp.yaml -p reportportal up -d --force-recreate' --build
-	
+	docker-compose kill && docker-compose rm	
