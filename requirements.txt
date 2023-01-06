@@ -9,3 +9,4 @@ reportportal-client
 pytest-reportportal
 pytest-xdist
 Faker
+colorama
