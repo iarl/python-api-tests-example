@@ -5,10 +5,10 @@ test-type:
 	python3 -m pytest -s -v -m $(TEST_TYPE)
 
 build:
-	docker-compose build
+	docker-compose -f docker-compose.yaml build
 
 start: 
-	docker-compose up -d
+	docker-compose -f docker-compose.yaml up -d
 
 restart:
 	make build && make start
@@ -18,9 +18,3 @@ stop:
 
 purge:
 	docker-compose kill && docker-compose rm
-
-reportportal:
-	docker-compose -f docker-compose.rp.yaml -p reportportal up -d --force-recreate' --build
-
-jenkins:
-	bash jenkins.sh

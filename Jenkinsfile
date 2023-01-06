@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
                 steps {
                     script {
-                        sh "docker build . -v /var/run/docker.sock:/var/run/docker.sock"
+                        sh "docker build --no-cache -t api-tests"
                     }
                 }
             }
@@ -25,7 +25,7 @@ pipeline {
         stage('Test') {
                 steps {
                     script {
-                        sh "docker run api-tests"
+                        sh "docker run --rm -d --priveleged api-tests"
                     }
                 }
             }
