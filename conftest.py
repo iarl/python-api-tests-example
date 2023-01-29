@@ -1,16 +1,8 @@
 import pytest
 import logging
-from dataclasses import dataclass
 from controllers.pet_controller import PetController
 from helpers.pet_helper import PetHelper
 from reportportal_client import RPLogger
-
-
-@dataclass
-class Response:
-    json: object
-    text: str
-    pet_id: str
 
 
 @pytest.fixture(scope="module")
@@ -19,7 +11,11 @@ def add_new_pet():
     pet_helper = PetHelper()
     body = pet_helper.valid_body()
     response = pet_controller.add_new(body)
-    return Response(response.json, str(response.json), response.json["id"])
+    return {
+        'json': response.json,
+        'text': str(response.json),
+        'pet_id': response.json["id"]
+        }
 
 
 @pytest.fixture(scope="session")

@@ -20,15 +20,15 @@ def test_add_new_pet(rp_logger):
 @pytest.mark.smoke
 @pytest.mark.positive
 def test_find_pet_by_id(add_new_pet, rp_logger):
-    response = pet_controller.find_by_id(add_new_pet.pet_id)
+    response = pet_controller.find_by_id(add_new_pet['pet_id'])
     assert_that(response.status_code).is_equal_to(200)
-    assert_that(response.text).is_equal_to(prettifier(add_new_pet.text))
+    assert_that(response.text).is_equal_to(prettifier(add_new_pet['text']))
 
 
 @pytest.mark.smoke
 @pytest.mark.positive
 def test_update_pet(add_new_pet, rp_logger):
-    body = pet_helper.valid_body(status='sold', pet_id=add_new_pet.pet_id)
+    body = pet_helper.valid_body(status='sold', pet_id=add_new_pet['pet_id'])
     response = pet_controller.update(body)
     assert_that(response.status_code).is_equal_to(200)
     assert_that(response.text).is_equal_to(prettifier(body))
@@ -37,7 +37,7 @@ def test_update_pet(add_new_pet, rp_logger):
 @pytest.mark.smoke
 @pytest.mark.positive
 def test_delete_pet(add_new_pet, rp_logger):
-    response = pet_controller.delete(pet_id=add_new_pet.pet_id)
+    response = pet_controller.delete(pet_id=add_new_pet['pet_id'])
     assert_that(response.status_code).is_equal_to(200)
 
 
