@@ -1,4 +1,4 @@
 
 
 def prettifier(body: str):
-    return body.replace("\"","'")
+    return body.replace("\"", "'")

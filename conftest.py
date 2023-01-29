@@ -1,8 +1,10 @@
-import pytest, logging
+import pytest
+import logging
 from dataclasses import dataclass
 from controllers.pet_controller import PetController
 from helpers.pet_helper import PetHelper
-from reportportal_client import RPLogger, RPLogHandler
+from reportportal_client import RPLogger
+
 
 @dataclass
 class Response:
